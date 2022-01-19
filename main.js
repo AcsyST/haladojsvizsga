@@ -13,6 +13,7 @@ class Project {
         this.resultTbody = document.getElementById('resultTbody');
 
         this.oldestCarBtn.onclick = this.findOldestCar;
+        this.after2004Btn.onclick = this.after2004Car;
 
     }
 
@@ -48,6 +49,20 @@ class Project {
         let result = [];
         for(let carData of cars) {
             if(carData.factoryYear == minYear) {
+                result.push(carData);
+            }
+        }
+
+        this.putCarsToTable(result);
+    }
+
+    findCarsAfter2004 = async() => {
+        let cars = await this.requestCars();
+
+
+        let result = [];
+        for(let carData of cars) {
+            if(carData.factoryYear > 2004) {
                 result.push(carData);
             }
         }
