@@ -13,7 +13,8 @@ class Project {
         this.resultTbody = document.getElementById('resultTbody');
 
         this.oldestCarBtn.onclick = this.findOldestCar;
-        this.after2004Btn.onclick = this.after2004Car;
+        this.after2004Btn.onclick = this.findCarsAfter2004;
+        this.searchField.onclick = this.searchForCarBrand;
 
     }
 
@@ -68,6 +69,31 @@ class Project {
         }
 
         this.putCarsToTable(result);
+    }
+
+    searchForCarBrand = async () => {
+        const searchText = this.searchField.ariaValueMax.toLocaleLowerCase();
+
+        if(searchText.length > 0) {
+
+            let cars = await this.requestCars();
+
+            let result = [];
+            for(let carData of cars) {
+                if(carData.brand.toLocaleLowerCase() == searchText) {
+                    result.push(carData);
+                }
+            }
+
+            if(result.length > 0) {
+                this.putCarsToTable(result);
+            }else {
+                // Nincs találat
+            }
+        }else {
+            // Üres mező
+
+        }
     }
 
 }
