@@ -13,6 +13,12 @@ class Project {
         this.resultTbody = document.getElementById('resultTbody');
 
     }
+
+    requestCars = async () => {
+        let respond = await fetch('cars.json');
+        let cars = await respond.json();
+        return cars;
+    }
 }
 
 const projectObject = new Project();
